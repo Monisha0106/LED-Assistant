@@ -4,15 +4,15 @@
 
 #define Relay1            D1
  
-#define WLAN_SSID       "   ----   "             // Your SSID
-#define WLAN_PASS       "  ----  "        // Your password
+#define WLAN_SSID       "TP-Link_DF90"             // Your SSID
+#define WLAN_PASS       "PLSLETMEBE"        // Your password
 
 /************************* Adafruit.io Setup *********************************/
 
 #define AIO_SERVER      "io.adafruit.com" //Adafruit Server
 #define AIO_SERVERPORT  1883                   
-#define AIO_USERNAME    "   -----   "            // Username
-#define AIO_KEY         "      ------------      "   // Auth Key
+#define AIO_USERNAME    "monishauttsha0106"            // Username
+#define AIO_KEY         "aio_gNxs00Xeqi7nN6YDaQxVkNO9Gxif"   // Auth Key
 
 //WIFI CLIENT
 WiFiClient client;
@@ -25,7 +25,7 @@ Adafruit_MQTT_Subscribe Light1 = Adafruit_MQTT_Subscribe(&mqtt, AIO_USERNAME"/fe
 void MQTT_connect();
 
 void setup() {
-  Serial.begin(115200);
+  Serial.begin(9600);
 
   pinMode(Relay1, OUTPUT);
   
@@ -46,9 +46,9 @@ void setup() {
   Serial.println(WiFi.localIP());
  
   mqtt.subscribe(&Light1);
-  mqtt.subscribe(&Light3);
-  mqtt.subscribe(&Light2);
-  mqtt.subscribe(&Light4);
+  // mqtt.subscribe(&Light3);
+  // mqtt.subscribe(&Light2);
+  // mqtt.subscribe(&Light4);
 }
 
 void loop() {
@@ -63,6 +63,7 @@ void loop() {
       Serial.println((char *)Light1.lastread);
       int Light1_State = atoi((char *)Light1.lastread);
       digitalWrite(Relay1, Light1_State);
+      Serial.println("hakku");
       
     }
     
@@ -70,7 +71,7 @@ void loop() {
 
   
 }
-
+ 
 void MQTT_connect() {
   int8_t ret;
 
@@ -93,6 +94,10 @@ void MQTT_connect() {
     }
   }
   Serial.println("MQTT Connected!");
+  // if (Relay1==1)
+  //   {
+  //     Serial.println("hakku");
+  //   }
   
 }
 
